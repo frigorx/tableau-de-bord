@@ -253,7 +253,6 @@
     border-radius: 3px;
     font-family: 'Calibri', sans-serif;
     font-weight: bold;
-    title: "Accessible uniquement sur ce PC (fichier local non synchronisé)";
   }
 
   .chip-demo {
@@ -397,7 +396,7 @@
     <button class="chip" data-filtre="perso">🏠 Perso</button>
     <button class="chip chip-demo" data-filtre="demo">🎬 Mode démo</button>
   </div>
-  <div class="compteur" id="compteur">35 applications</div>
+  <div class="compteur" id="compteur">36 applications</div>
 </div>
 
 <main id="contenu">
@@ -416,12 +415,27 @@
           HAL v3.0
           <span class="badge-nouveau">NOUVEAU</span>
           <span class="badge-star">★</span>
-          <span class="badge-local" title="Serveur local — Lenovo uniquement">🖥️ Lenovo</span>
+          <span class="badge-local" title="Logiciel fermé — ne tourne qu'en local sur le Lenovo, pas de version en ligne (données élèves + IA locale)">🔒 Logiciel fermé</span>
         </div>
-        <div class="carte-desc">Application locale (Node.js + IA Ollama) — suivi par compétences « le Mur », observations en langage naturel → appréciations de fin d'année, coffre chiffré RGPD-by-design. Tourne en local sur le port 2002. <em>Cap rentrée septembre 2026.</em></div>
+        <div class="carte-desc">Application locale (Node.js + IA Ollama) — suivi par compétences « le Mur », observations en langage naturel → appréciations de fin d'année, coffre chiffré RGPD-by-design. Tourne en local sur le port 2002 uniquement, aucune version en ligne. <em>Cap rentrée septembre 2026.</em></div>
         <div class="carte-date">Mis à jour le 26/06/2026 · local, non publié</div>
         <div class="carte-boutons">
           <a class="btn btn-local" href="http://localhost:2002" target="_blank">▶ Lancer (local 2002)</a>
+          <a class="btn btn-github" href="https://github.com/frigorx/HAL-v3" target="_blank">GitHub (privé)</a>
+        </div>
+      </div>
+
+      <div class="carte" data-mots="hermes local agent claude code espace prive assistant mains">
+        <div class="carte-titre">
+          Espace Hermès (local)
+          <span class="badge-nouveau">NOUVEAU</span>
+          <span class="badge-local" title="Logiciel fermé — agent local sur C:\Hermes, pas de version en ligne">🔒 Logiciel fermé</span>
+        </div>
+        <div class="carte-desc">2ᵉ IA libre (Claude Code dédié), étanche de HAL — espace de travail agentique local pour Franck.</div>
+        <div class="carte-date">Mis à jour le 02/07/2026 · local, non publié</div>
+        <div class="carte-boutons">
+          <a class="btn btn-local" href="file:///C:/Hermes" target="_blank">📁 Dossier projet</a>
+          <a class="btn btn-github" href="https://github.com/frigorx/hermes-local" target="_blank">GitHub (privé)</a>
         </div>
       </div>
 
@@ -917,12 +931,13 @@
           inerweb-immo
           <span class="badge-nouveau">NOUVEAU</span>
           <span class="badge-star">★</span>
-          <span class="badge-local" title="Fichier local C:\git — Lenovo uniquement">🖥️ Lenovo</span>
+          <span class="badge-local" title="Logiciel fermé — application .exe locale chiffrée, pas de version en ligne (données financières familiales)">🔒 Logiciel fermé</span>
         </div>
         <div class="carte-desc">Logiciel SCI familiale (Tauri 2 — application .exe locale chiffrée). Gestion locative + comptabilité/fiscal. Backend chiffré, 33 commandes, interface React. <em>Local uniquement, non publié.</em></div>
         <div class="carte-date">Mis à jour le 27/06/2026 · local, non publié</div>
         <div class="carte-boutons">
           <a class="btn btn-local" href="file:///C:/git/inerweb-immo" target="_blank">📁 Dossier projet</a>
+          <a class="btn btn-github" href="https://github.com/frigorx/inerweb-immo" target="_blank">GitHub (privé)</a>
         </div>
       </div>
 
@@ -936,8 +951,9 @@
 </main>
 
 <footer>
-  <strong>inerWeb Édu</strong> — Tableau de bord mis à jour le 01/07/2026 · par F. Henninot<br>
-  35 applications référencées · GitHub : <strong>frigorx</strong> · Données traitées localement — RGPD by design
+  <strong>inerWeb Édu</strong> — Tableau de bord mis à jour le 02/07/2026 · par F. Henninot<br>
+  36 applications référencées · GitHub : <strong>frigorx</strong> · Données traitées localement — RGPD by design<br>
+  <span title="Logiciels fermés">🔒</span> = logiciel fermé, non accessible en ligne (usage interne uniquement) — le code source peut être partagé via un dépôt GitHub privé
 </footer>
 
 <script>
