@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>inerWeb Édu — Tableau de bord F. Henninot</title>
+<style>
+  :root {
+    --bleu: #1b3a63;
+    --bleu-doux: #5a7ba3;
+    --bleu-clair: #eef2f7;
+    --orange: #ff6b35;
+    --orange-doux: #f5a07a;
+    --orange-clair: #fff4ed;
+    --vert: #2e7d32;
+    --rouge: #c62828;
+    --fond: #faf8f4;
+    --fond-section: #f4f1ea;
+    --gris-bordure: #e6e1d6;
+    --gris-texte: #6a6258;
+    --texte: #2a2a2a;
+    --blanc: #ffffff;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Calibri', 'Segoe UI', sans-serif;
+    font-size: 17px;
+    line-height: 1.5;
+    color: var(--texte);
+    background: var(--fond);
+    text-align: left;
+    letter-spacing: 0.3px;
+  }
+
+  h1, h2, h3 {
+    font-family: 'Trebuchet MS', 'Calibri', sans-serif;
+    font-weight: bold;
+    color: var(--bleu);
+    margin: 0;
+    text-align: left;
+  }
+
+  /* ===== EN-TÊTE ===== */
+  header {
+    background: var(--blanc);
+    border-bottom: 2px solid var(--gris-bordure);
+    padding: 20px 32px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .logo-bar {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+
+  .logo-flocon {
+    font-size: 32px;
+    color: var(--bleu);
+  }
+
+  .logo-text {
+    font-family: 'Trebuchet MS', sans-serif;
+    font-weight: bold;
+    font-size: 28px;
+    color: var(--bleu);
+    letter-spacing: 0.5px;
+  }
+
+  .logo-cartouche {
+    background: var(--orange);
+    color: var(--blanc);
+    font-family: 'Trebuchet MS', sans-serif;
+    font-weight: bold;
+    padding: 4px 12px;
+    border-radius: 4px;
+    font-size: 16px;
+  }
+
+  .logo-signature {
+    font-size: 14px;
+    color: var(--gris-texte);
+    font-style: italic;
+  }
+
+  .header-sous-titre {
+    margin-top: 6px;
+    font-size: 15px;
+    color: var(--gris-texte);
+  }
+
+  /* ===== BARRE OUTILS ===== */
+  .outils {
+    background: var(--fond-section);
+    border-bottom: 1px solid var(--gris-bordure);
+    padding: 16px 32px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+  }
+
+  .recherche {
+    flex: 1;
+    min-width: 240px;
+    padding: 10px 14px;
+    font-size: 17px;
+    font-family: 'Calibri', sans-serif;
+    border: 1px solid var(--gris-bordure);
+    border-radius: 6px;
+    background: var(--blanc);
+    color: var(--texte);
+  }
+
+  .recherche:focus {
+    outline: none;
+    border-color: var(--orange-doux);
+    box-shadow: 0 0 0 3px var(--orange-clair);
+  }
+
+  .filtres {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .chip {
+    padding: 8px 14px;
+    font-size: 15px;
+    font-family: 'Calibri', sans-serif;
+    border: 1px solid var(--gris-bordure);
+    background: var(--blanc);
+    color: var(--bleu);
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.15s;
+    font-weight: bold;
+  }
+
+  .chip:hover {
+    background: var(--bleu-clair);
+    border-color: var(--bleu-doux);
+  }
+
+  .chip.actif {
+    background: var(--bleu-clair);
+    color: var(--bleu);
+    border-color: var(--bleu);
+  }
+
+  .compteur {
+    font-size: 14px;
+    color: var(--gris-texte);
+    margin-left: auto;
+  }
+
+  /* ===== CONTENU ===== */
+  main {
+    padding: 24px 32px 60px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .categorie {
+    margin-bottom: 36px;
+  }
+
+  .categorie-titre {
+    font-size: 22px;
+    padding-bottom: 10px;
+    margin-bottom: 18px;
+    border-bottom: 2px solid var(--orange-doux);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .categorie-icone {
+    font-size: 26px;
+  }
+
+  .categorie-compte {
+    font-size: 14px;
+    color: var(--gris-texte);
+    font-weight: normal;
+    margin-left: 8px;
+  }
+
+  .grille {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 16px;
+  }
+
+  /* ===== CARTES ===== */
+  .carte {
+    background: var(--blanc);
+    border: 1px solid var(--gris-bordure);
+    border-left: 3px solid var(--bleu-doux);
+    border-radius: 8px;
+    padding: 16px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: all 0.15s;
+  }
+
+  .carte:hover {
+    border-left-color: var(--orange);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
+    transform: translateY(-2px);
+  }
+
+  .carte-titre {
+    font-family: 'Trebuchet MS', sans-serif;
+    font-weight: bold;
+    font-size: 17px;
+    color: var(--bleu);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .badge-nouveau {
+    background: var(--vert);
+    color: var(--blanc);
+    font-size: 11px;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-family: 'Calibri', sans-serif;
+    font-weight: bold;
+  }
+
+  .badge-star {
+    color: var(--orange);
+    font-size: 16px;
+  }
+
+  .badge-local {
+    background: #5a5a5a;
+    color: var(--blanc);
+    font-size: 11px;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-family: 'Calibri', sans-serif;
+    font-weight: bold;
+    title: "Accessible uniquement sur ce PC (fichier local non synchronisé)";
+  }
+
+  .chip-demo {
+    background: var(--orange);
+    color: var(--blanc);
+    border-color: var(--orange);
+    font-weight: bold;
+  }
+
+  .chip-demo:hover {
+    background: #e85a26;
+    border-color: #e85a26;
+    color: var(--blanc);
+  }
+
+  .chip-demo.actif {
+    background: #e85a26;
+    color: var(--blanc);
+    border-color: #c04a1a;
+  }
+
+  .carte-desc {
+    font-size: 15px;
+    color: var(--texte);
+    line-height: 1.5;
+    flex: 1;
+  }
+
+  .carte-date {
+    font-size: 13px;
+    color: var(--gris-texte);
+    font-style: italic;
+  }
+
+  .carte-boutons {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    padding: 8px 14px;
+    font-size: 15px;
+    font-family: 'Calibri', sans-serif;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    border: 1px solid;
+    transition: all 0.15s;
+  }
+
+  .btn-pages {
+    background: var(--orange);
+    color: var(--blanc);
+    border-color: var(--orange);
+  }
+
+  .btn-pages:hover {
+    background: #e85a26;
+    border-color: #e85a26;
+  }
+
+  .btn-github {
+    background: var(--blanc);
+    color: var(--bleu);
+    border-color: var(--gris-bordure);
+  }
+
+  .btn-github:hover {
+    background: var(--bleu-clair);
+    border-color: var(--bleu-doux);
+  }
+
+  .btn-local {
+    background: var(--blanc);
+    color: var(--vert);
+    border-color: var(--vert);
+  }
+
+  .btn-local:hover {
+    background: var(--vert);
+    color: var(--blanc);
+  }
+
+  /* ===== PIED DE PAGE ===== */
+  footer {
+    background: var(--fond-section);
+    color: var(--gris-texte);
+    padding: 18px 32px;
+    text-align: left;
+    font-size: 14px;
+    margin-top: 40px;
+    border-top: 1px solid var(--gris-bordure);
+  }
+
+  footer strong { color: var(--bleu); }
+
+  /* ===== ÉTAT VIDE ===== */
+  .vide {
+    text-align: center;
+    padding: 40px;
+    color: var(--gris-texte);
+    font-size: 16px;
+  }
+
+  .categorie.masquee { display: none; }
+  .carte.masquee { display: none; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo-bar">
+    <span class="logo-flocon">❄</span>
+    <span class="logo-text">inerWeb</span>
+    <span class="logo-cartouche">Édu</span>
+    <span class="logo-signature">par F. Henninot</span>
+  </div>
+  <div class="header-sous-titre">
+    Tableau de bord — Accès rapide à toutes mes applications et outils
+  </div>
+</header>
+
+<div class="outils">
+  <input type="text" class="recherche" id="recherche" placeholder="🔍 Rechercher un outil, une classe, une compétence..." />
+  <div class="filtres" id="filtres">
+    <button class="chip actif" data-filtre="tous">Tous</button>
+    <button class="chip" data-filtre="evaluation">📊 Évaluations</button>
+    <button class="chip" data-filtre="suivi">📋 Suivi élèves</button>
+    <button class="chip" data-filtre="outils">🔧 Outils froid</button>
+    <button class="chip" data-filtre="elec">⚡ Électrotech</button>
+    <button class="chip" data-filtre="securite">🛡️ Sécurité</button>
+    <button class="chip" data-filtre="fluides">📦 Fluides</button>
+    <button class="chip" data-filtre="orientation">🎓 Orientation</button>
+    <button class="chip" data-filtre="ia">🤖 IA</button>
+    <button class="chip" data-filtre="portails">📺 Portails</button>
+    <button class="chip" data-filtre="perso">🏠 Perso</button>
+    <button class="chip chip-demo" data-filtre="demo">🎬 Mode démo</button>
+  </div>
+  <div class="compteur" id="compteur">35 applications</div>
+</div>
+
+<main id="contenu">
+
+  <!-- INTELLIGENCE ARTIFICIELLE -->
+  <section class="categorie" data-categorie="ia">
+    <h2 class="categorie-titre">
+      <span class="categorie-icone">🤖</span>
+      Intelligence artificielle & pédagogie
+      <span class="categorie-compte">— IA locale, appréciations, découverte de l'IA</span>
+    </h2>
+    <div class="grille">
+
+      <div class="carte" data-mots="hal ia locale ollama appreciations competences le mur rgpd local node coffre chiffre observations vie scolaire">
+        <div class="carte-titre">
+          HAL v3.0
+          <span class="badge-nouveau">NOUVEAU</span>
+          <span class="badge-star">★</span>
+          <span class="badge-local" title="Serveur local — Lenovo uniquement">🖥️ Lenovo</span>
+        </div>
+        <div class="carte-desc">Application locale (Node.js + IA Ollama) — suivi par compétences « le Mur », observations en langage naturel → appréciations de fin d'année, coffre chiffré RGPD-by-design. Tourne en local sur le port 2002. <em>Cap rentrée septembre 2026.</em></div>
+        <div class="carte-date">Mis à jour le 26/06/2026 · local, non publié</div>
+        <div class="carte-boutons">
+          <a class="btn btn-local" href="http://localhost:2002" target="_blank">▶ Lancer (local 2002)</a>
+        </div>
+      </div>
+
+      <div class="carte" data-mots="decouverte ia intelligence artificielle pedagogie programme eleves public">
+        <div class="carte-titre">
+          decouverte-ia
+          <span class="badge-nouveau">NOUVEAU</span>
+        </div>
+        <div class="carte-desc">Programme de découverte de l'IA · inerWeb Édu — page pédagogique pour initier les élèves à l'intelligence artificielle.</div>
+        <div class="carte-date">Mis à jour le 02/06/2026</div>
+        <div class="carte-boutons">
+          <a class="btn btn-pages" href="https://frigorx.github.io/decouverte-ia/" target="_blank">▶ Ouvrir</a>
+          <a class="btn btn-github" href="https://github.com/frigorx/decouverte-ia" target="_blank">GitHub</a>
+        </div>
+      </div>
+
+      <div class="carte" data-mots="hermes assistant ia installateur telechargement claude code page landing local">
+        <div class="carte-titre">
+          hermes
+          <span class="badge-nouveau">NOUVEAU</span>
+        </div>
+        <div class="carte-desc">Hermès — « l'assistant qui a les mains ». Page de présentation et de téléchargement de l'installateur Hermès.</div>
+        <div class="carte-date">Mis à jour le 27/06/2026</div>
+        <div class="carte-boutons">
+          <a class="btn btn-pages" href="https://frigorx.github.io/hermes/" target="_blank">▶ Ouvrir</a>
+          <a class="btn btn-github" href="https://github.com/frigorx/hermes" target="_blank">GitHub</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ÉVALUATIONS & QCM -->
+  <section class="categorie" data-categorie="evaluation">
+    <h2 class="categorie-titre">
+      <span class="categorie-icone">📊</span>
+      Évaluations & QCM
+      <span class="categorie-compte">— Quiz, DM, contrôles, certifications</span>
+    </h2>
+    <div class="grille">
+
+      <div class="carte" data-mots="cap ifca eval ep1 ep2 ep3 evaluation 4 profs">
+        <div class="carte-titre">
+          inerweb-cap-ifca-eval
+          <span class="badge-nouveau">NOUVEAU</span>
+          <span class="badge-star">★</span>
+        </div>
+        <div class="carte-desc">Évaluation CAP IFCA EP1/EP2/EP3 — outil partagé entre 4 utilisateurs. Stockage Sheet, pseudonymisation E01→E24.</div>
+        <div class="carte-date">Mis à jour le 11/05/2026</div>
+        <div class="carte-boutons">
+          <a class="btn btn-pages" href="https://frigorx.github.io/inerweb-cap-ifca-eval/" target="_blank">▶ Ouvrir</a>
+          <a class="btn btn-github" href="https://github.com/frigorx/inerweb-cap-ifca-eval" target="_blank">GitHub</a>
+        </div>
+      </div>
+
+      <div class="carte" data-mots="bilan tne quiz cockpit frigo 2nde fin annee">
+        <div class="carte-titre">
+          inerweb-bilan-tne
+          <span class="badge-nouveau">NOUVEAU</span>
+        </div>
+        <div class="carte-desc">Bilan d'année 2nde TNE — Quiz Cockpit Frigo, évaluation gamifiée des acquis sur la filière froid.</div>
+        <div class="carte-date">Mis à jour le 07/05/2026</div>
+        <div class="carte-boutons">
+          <a class="btn btn-pages" href="https://frigorx.github.io/inerweb-bilan-tne/" target="_blank">▶ Ouvrir</a>
+          <a class="btn btn-github" href="https://github.com/frigorx/inerweb-bilan-tne" target="_blank">GitHub</a>
+        </div>
+      </div>
+
+      <div class="carte" data-mots="fgas f-gas mfer bac pro habilitation cours interactif eval">
+        <div class="carte-titre">
+          fgas-eval-mfer
+          <span class="badge-star">★</span>
+        </div>
+        <div class="carte-desc">Cours + évaluation interactive F-Gas III — BAC PRO MFER. Mode présentiel (prof.html) + DM élève chiffré + tableau de bord prof.</div>
+        <div class="carte-date">Mis à jour le 05/05/2026</div>
+        <div class="carte-boutons">
+          <a class="btn btn-pages" href="https://frigorx.github.io/fgas-eval-mfer/" target="_blank">▶ Ouvrir</a>
+          <a class="btn btn-github" href="https://github.com/frigorx/fgas-eval-mfer" target="_blank">GitHub</a>
+        </div>
+      </div>
+
+      <div class="carte" data-mots="qcm travail hauteur securite irisst">
+        <div class="carte-titre">
+          qcm-travail-hauteur
+          <span class="badge-nouveau">NOUVEAU</span>
+        </div>
+        <div class="carte-desc">QCM Le travail en hauteur — module pédagogique sécurité, prévention des chutes.</div>
+        <div class="carte-date">Mis à jour le 30/04/2026</div>
+        <div class="carte-boutons">
+          <a class="btn btn-pages" href="https://frigorx.github.io/qcm-travail-hauteur/" target="_blank">▶ Ouvrir</a>
+          <a class="btn btn-github" href="https://github.com/frigorx/qcm-travail-hauteur" target="_blank">GitHub</a>
+        </div>
+      </div>
+
+      <div class="carte" data-mots="evaluation tne chaleur sensible latente gamifiee">
+        <div class="carte-titre">evaluation-tne</div>
+        <div class="carte-desc">Évaluation gamifiée Séquence 1 — Chaleur sensible et latente (2nde TNE).</div>
+        <div class="carte-date">Mis à jour en septembre 2025</div>
+        <div class="carte-boutons">
+          <a class="btn btn-pages" href="https://frigorx.github.io/evaluation-tne/" target="_blank">▶ Ouvrir</a>
+          <a class="btn btn-github" href="https://github.com/frigorx/evaluation-tne" target="_blank">GitHub</a>
+        </div>
+      </div>
+
+      <div class="carte" data-mots="qcm accueil securite rentree">
+        <div class="carte-titre">QCM-accueil-sécurité</div>
+        <div class="carte-desc">QCM accueil sécurité — version rentrée.</div>
+        <div class="carte-date">Mis à jour en septembre 2025</div>
+        <div class="carte-boutons">
+          <a class="btn btn-pages" href="https://frigorx.github.io/QCM-accueil-s-curit-LPP-Jacques-Raynaud-Marseille/" target="_blank">▶ Ouvrir</a>
+          <a class="btn btn-github" href="https://github.com/frigorx/QCM-accueil-s-curit-LPP-Jacques-Raynaud-Marseille" target="_blank">GitHub</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SUIVI ÉLÈVES (TT / CCF) -->
+  <section class="categorie" data-categorie="suivi">
+    <h2 class="categorie-titre">
+      <span class="categorie-icone">📋</span>
+      Suivi élèves — Tableaux de travail (TT / CCF)
+      <span class="categorie-compte">— Cahier de bord, compétences, PFMP</span>
+    </h2>
+    <div class="grille">
+
+      <div class="carte" data-mots="frigorx github pages portail principal tt-ia">
+        <div class="carte-titre">
+          frigorx.github.io
+          <span class="badge-star">★</span>
+        </div>
+        <div class="carte-desc">Hub GitHub Pages principal — héberge notamment <strong>tt-ia/</strong> (inerWeb TT-IA v7.8.5 en production).</div>
+        <div class="carte-date">Mis à jour le 12/05/2026</div>
+        <div class="carte-boutons">
+          <a class="btn btn-pages" href="https://frigorx.github.io/" target="_blank">▶ Ouvrir hub</a>
+          <a class="btn btn-pages" href="https://frigorx.github.io/tt-ia/" target="_blank">▶ TT-IA</a>
+          <a class="btn btn-github" href="https://github.com/frigorx/frigorx.github.io" target="_blank">GitHub</a>
+        </div>
+      </div>
+
+      <div class="carte" data-mots="tt v2 refonte ccf clone fusion test">
+        <div class="carte-titre">inerweb-tt-v2</div>
+        <div class="carte-desc">inerWeb TT v2.0 — Refonte CCF (clone de fusion, environnement de test).</div>
+        <div class="carte-date">Mis à jour le 03/04/2026</div>
+        <div class="carte-boutons">
+          <a class="btn btn-pages" href="https://frigorx.github.io/inerweb-tt-v2/" target="_blank">▶ Ouvrir</a>
+          <a class="btn btn-github" href="https://github.com/frigorx/inerweb-tt-v2" target="_blank">GitHub</a>
+        </div>
+      </div>
+
+      <div class="carte" data-mots="tt fusion v4.8 v11 v8">
+        <div class="carte-titre">inerweb-tt-fusion</div>
+        <div class="carte-desc">inerWeb TT Fusion — Le meilleur des versions 4.8 + 11 + 8.</div>
+        <div class="carte-date">Mis à jour le 18/03/2026</div>
+        <div class="carte-boutons">
+          <a class="btn btn-pages" href="https://frigorx.github.io/inerweb-tt-fusion/" target="_blank">▶ Ouvrir</a>
+          <a class="btn btn-github" href="https://github.com/frigorx/inerweb-tt-fusion" target="_blank">GitHub</a>
+        </div>
+      </div>
+
+      <div class="carte" data-mots="tt fe filiere energetique multi cap ifca mfer tne">
+        <div class="carte-titre">inerweb-tt-fe</div>
+        <div class="carte-desc">inerWeb TT Filière Énergétique — Suivi CCF multi-filière (CAP IFCA, BAC PRO MFER, 2nde TNE).</div>
+        <div class="carte-date">Mis à jour le 12/03/2026</div>
+        <div class="carte-boutons">
+          <a class="btn btn-pages" href="https://frigorx.github.io/inerweb-tt-fe/" target="_blank">▶ Ouvrir</a>
+          <a class="btn btn-github" href="https://github.com/frigorx/inerweb-tt-fe" target="_blank">GitHub</a>
+        </div>
+      </div>
+
+      <div class="carte" data-mots="tt mfer bac pro tne 2nde">
+        <div class="carte-titre">inerweb-tt-mfer</div>
+        <div class="carte-desc">inerWeb TT — Bac Pro MFER (Métiers du Froid et des Énergies Renouvelables) + 2nde TNE.</div>
+        <div class="carte-date">Mis à jour le 03/04/2026</div>
+        <div class="carte-boutons">
+          <a class="btn btn-pages" href="https://frigorx.github.io/inerweb-tt-mfer/" target="_blank">▶ Ouvrir</a>
+          <a class="btn btn-github" href="https://github.com/frigorx/inerweb-tt-mfer" target="_blank">GitHub</a>
+        </div>
+      </div>
+
+      <div class="carte" data-mots="tt v4">
+        <div class="carte-titre">inerweb-tt-v4</div>
+        <div class="carte-desc">inerWeb TT v4 — version intermédiaire.</div>
+        <div class="carte-date">Mis à jour le 03/04/2026</div>
+        <div class="carte-boutons">
+          <a class="btn btn-pages" href="https://frigorx.github.io/inerweb-tt-v4/" target="_blank">▶ Ouvrir</a>
+          <a class="btn btn-github" href="https://github.com/frigorx/inerweb-tt-v4" target="_blank">GitHub</a>
+        </div>
+      </div>
+
+      <div class="carte" data-mots="pfmp stage entreprise periode formation">
+        <div class="carte-titre">PFMP</div>
+        <div class="carte-desc">Suivi des Périodes de Formation en Milieu Professionnel.</div>
+        <div class="carte-date">Mis à jour le 03/04/2026</div>
+        <div class="carte-boutons">
+          <a class="btn btn-pages" href="https://frigorx.github.io/PFMP/" target="_blank">▶ Ouvrir</a>
+          <a class="btn btn-github" href="https://github.com/frigorx/PFMP" target="_blank">GitHub</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- OUTILS FROID -->
+  <section class="categorie" data-categorie="outils">
+    <h2 class="categorie-titre">
+      <span class="categorie-icone">🔧</span>
+      Outils froid & climatisation
+      <span class="categorie-compte">— Calcul, simulation, diagrammes</span>
+    </h2>
+    <div class="grille">
+
+      <div class="carte" data-mots="frigolo mollier psychro bilan thermique cop pac fluides regle outils portail">
+        <div class="carte-titre">
+          inerweb-frigolo
+          <span class="badge-star">★</span>
+        </div>
+        <div class="carte-desc">Portail FRIGOLO — Mollier v3 Pro, Bilan Thermique, Psychro v2, TP COP PAC, Réglette Fluides v6.6, Conversion Pouce & Cintrage. Bibliothèque IRIS-ST + Risques Pro.</div>
+        <div class="carte-date">Mis à jour le 08/04/2026</div>
+        <div class="carte-boutons">
+          <a class="btn btn-pages" href="https://frigorx.github.io/inerweb-frigolo/" target="_blank">▶ Ouvrir</a>
+          <a class="btn btn-github" href="https://github.com/frigorx/inerweb-frigolo" target="_blank">GitHub</a>
+        </div>
+      </div>
+
+      <div class="carte" data-mots="pressostats kp1 kp5 bp hp basse haute pression danfoss">
+        <div class="carte-titre">inerweb-pressostats</div>
+        <div class="carte-desc">Modules interactifs pressostats KP1 (basse pression) et KP5 (haute pression) — réglage et diagnostic.</div>
+        <div class="carte-date">Mis à jour le 03/04/2026</div>
+        <div class="carte-boutons">
+          <a class="btn btn-pages" href="https://frigorx.github.io/inerweb-pressostats/" target="_blank">▶ Ouvrir</a>
+          <a class="btn btn-github" href="https://github.com/frigorx/inerweb-pressostats" target="_blank">GitHub</a>
+        </div>
+      </div>
+
+      <div class="carte" data-mots="diagramme enthalpique mollier v3.1 cycle frigorifique">
+        <div class="carte-titre">diagramme-enthalpique</div>
+        <div class="carte-desc">Diagramme Enthalpique+ v3.1 — Tracé du cycle frigorifique sur Mollier, outil pédagogique.</div>
+        <div class="carte-date">Mis à jour le 30/03/2026</div>
+        <div class="carte-boutons">
+          <a class="btn btn-pages" href="https://frigorx.github.io/diagramme-enthalpique/" target="_blank">▶ Ouvrir</a>
+          <a class="btn btn-github" href="https://github.com/frigorx/diagramme-enthalpique" target="_blank">GitHub</a>
+        </div>
+      </div>
+
+      <div class="carte" data-mots="symboles bibliotheque qelectrotech jeux educatifs">
+        <div class="carte-titre">inerweb-symboles</div>
+        <div class="carte-desc">Bibliothèque de symboles électriques et frigorifiques + jeux éducatifs (QElectroTech).</div>
+        <div class="carte-date">Mis à jour le 04/04/2026</div>
+        <div class="carte-boutons">
+          <a class="btn btn-pages" href="https://frigorx.github.io/inerweb-symboles/" target="_blank">▶ Ouvrir</a>
+          <a class="btn btn-github" href="https://github.com/frigorx/inerweb-symboles" target="_blank">GitHub</a>
+        </div>
+      </div>
+
+      <div class="carte" data-mots="frigo connecte akcc danfoss modbus r407c pilotage tp">
+        <div class="carte-titre">
+          frigo-connecte-akcc
+          <span class="badge-nouveau">NOUVEAU</span>
+        </div>
+        <div class="carte-desc">Frigo connecté AK-CC 550 — Pilotage pédagogique Danfoss via Modbus RTU + 7 TP interactifs (platine R407C).</div>
+        <div class="carte-date">Mis à jour le 04/04/2026</div>
+        <div class="carte-boutons">
+          <a class="btn btn-pages" href="https://frigorx.github.io/frigo-connecte-akcc/" target="_blank">▶ Ouvrir</a>
+          <a class="btn btn-github" href="https://github.com/frigorx/frigo-connecte-akcc" target="_blank">GitHub</a>
+        </div>
+      </div>
+
+      <div class="carte" data-mots="utilitaires froid clim filiere">
+        <div class="carte-titre">inerweb-edu</div>
+        <div class="carte-desc">Utilitaires pour la filière froid et climatisation.</div>
+        <div class="carte-date">Mis à jour le 03/04/2026</div>
+        <div class="carte-boutons">
+          <a class="btn btn-pages" href="https://frigorx.github.io/inerweb-edu/" target="_blank">▶ Ouvrir</a>
+          <a class="btn btn-github" href="https://github.com/frigorx/inerweb-edu" target="_blank">GitHub</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ÉLECTROTECHNIQUE -->
+  <section class="categorie" data-categorie="elec">
+    <h2 class="categorie-titre">
+      <span class="categorie-icone">⚡</span>
+      Électrotechnique & habilitation
+      <span class="categorie-compte">— Schémas, câblage, habilitations électriques</span>
+    </h2>
+    <div class="grille">
+
+      <div class="carte" data-mots="electrotechnique habilitation modules interactifs">
+        <div class="carte-titre">
+          inerweb-elec
+          <span class="badge-nouveau">NOUVEAU</span>
+        </div>
+        <div class="carte-desc">Modules interactifs habilitation électrique & sécurité — B0, BR, BC, BE.</div>
+        <div class="carte-date">Mis à jour le 04/04/2026</div>
+        <div class="carte-boutons">
+          <a class="btn btn-pages" href="https://frigorx.github.io/inerweb-elec/" target="_blank">▶ Ouvrir</a>
+          <a class="btn btn-github" href="https://github.com/frigorx/inerweb-elec" target="_blank">GitHub</a>
+        </div>
+      </div>
+
+      <div class="carte" data-mots="schema electrotechnique compagnon observer colorier cabler progression">
+        <div class="carte-titre">
+          inerweb-schema
+          <span class="badge-nouveau">NOUVEAU</span>
+        </div>
+        <div class="carte-desc">Compagnon Électrotechnique — Observer · Colorier · Câbler. Progression sur 2 ans.</div>
+        <div class="carte-date">Mis à jour le 08/04/2026</div>
+        <div class="carte-boutons">
+          <a class="btn btn-pages" href="https://frigorx.github.io/inerweb-schema/" target="_blank">▶ Ouvrir</a>
+          <a class="btn btn-github" href="https://github.com/frigorx/inerweb-schema" target="_blank">GitHub</a>
+        </div>
+      </div>
+
+      <div class="carte" data-mots="td triphase triphasé couplage etoile triangle recepteur moteur asynchrone electrotechnique">
+        <div class="carte-titre">
+          td-triphase-FINAL-v2
+          <span class="badge-nouveau">NOUVEAU</span>
+        </div>
+        <div class="carte-desc">TD Triphasé — Couplage étoile/triangle, récepteurs triphasés, moteur asynchrone. Fichier local uniquement (non publié sur GitHub).</div>
+        <div class="carte-date">Mis à jour le 02/12/2025 · local</div>
+        <div class="carte-boutons">
+          <a class="btn btn-local" href="file:///C:/Users/henni/OneDrive/Bureau/25%2026/cours%2025_26/prpas%20inspe/td-triphase-FINAL-v2.html" target="_blank">▶ Ouvrir (local)</a>
+        </div>
+      </div>
+
+      <div class="carte" data-mots="sous tension cables electriques td fondamentaux tableau electrique cas particuliers evaluation cap ifca mfer tne">
+        <div class="carte-titre">
+          sous-tension
+          <span class="badge-nouveau">NOUVEAU</span>
+        </div>
+        <div class="carte-desc">Sous tension — Parcours câbles électriques : 3 TD (fondamentaux, tableau électrique, cas particuliers) + évaluation notée sur 20 avec positionnement par filière (CAP IFCA, Bac Pro MFER, 2nde TNE, TP Sup CVC).</div>
+        <div class="carte-date">Mis à jour le 01/07/2026</div>
+        <div class="carte-boutons">
+          <a class="btn btn-pages" href="https://frigorx.github.io/sous-tension/" target="_blank">▶ Ouvrir</a>
+          <a class="btn btn-github" href="https://github.com/frigorx/sous-tension" target="_blank">GitHub</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SÉCURITÉ -->
+  <section class="categorie" data-categorie="securite">
+    <h2 class="categorie-titre">
+      <span class="categorie-icone">🛡️</span>
+      Sécurité & risques professionnels
+      <span class="categorie-compte">— SSI, hauteur, IRIS-ST</span>
+    </h2>
+    <div class="grille">
+
+      <div class="carte" data-mots="ssi simulateur ssiap incendie sirene grandeur nature">
+        <div class="carte-titre">
+          ssi-trainer
+          <span class="badge-nouveau">NOUVEAU</span>
+        </div>
+        <div class="carte-desc">Simulateur SSI pédagogique grandeur nature — Formation SSIAP 1/2/3. Niveau 1 refondu (palette d'actions, doc élève, fiche papier), public CAP→BTS MOS.</div>
+        <div class="carte-date">Mis à jour le 27/06/2026</div>
+        <div class="carte-boutons">
+          <a class="btn btn-pages" href="https://frigorx.github.io/ssi-trainer/" target="_blank">▶ Ouvrir</a>
+          <a class="btn btn-github" href="https://github.com/frigorx/ssi-trainer" target="_blank">GitHub</a>
+        </div>
+      </div>
+
+
+    </div>
+  </section>
+
+  <!-- FLUIDES (F-GAZ / CERFA) -->
+  <section class="categorie" data-categorie="fluides">
+    <h2 class="categorie-titre">
+      <span class="categorie-icone">📦</span>
+      Gestion des fluides frigorigènes
+      <span class="categorie-compte">— CERFA, F-GAZ, BSD, peser bouteilles</span>
+    </h2>
+    <div class="grille">
+
+      <div class="carte" data-mots="cerfa fgaz fluide bsd fi 15497 inerweb fluide v8">
+        <div class="carte-titre">
+          -inerweb-fluid-cerfa-fi-bsd-4
+          <span class="badge-star">★</span>
+        </div>
+        <div class="carte-desc">inerWeb Fluide v8 — CERFA 15497*04, Fiche d'Intervention, BSD. Programme d'aide à la création/gestion des fluides frigorigènes.</div>
+        <div class="carte-date">Mis à jour le 18/04/2026</div>
+        <div class="carte-boutons">
+          <a class="btn btn-pages" href="https://frigorx.github.io/-inerweb-fluid-cerfa-fi-bsd-4/" target="_blank">▶ Ouvrir</a>
+          <a class="btn btn-github" href="https://github.com/frigorx/-inerweb-fluid-cerfa-fi-bsd-4" target="_blank">GitHub</a>
+        </div>
+      </div>
+
+      <div class="carte" data-mots="tp peser bouteilles inventaire frigorigenes cap ifca">
+        <div class="carte-titre">inerweb-tp-peser-bouteilles</div>
+        <div class="carte-desc">TP Inventaire / Peser Bouteilles Frigorigènes — CAP IFCA. Utilise le collecteur universel.</div>
+        <div class="carte-date">Mis à jour le 18/04/2026</div>
+        <div class="carte-boutons">
+          <a class="btn btn-pages" href="https://frigorx.github.io/inerweb-tp-peser-bouteilles/" target="_blank">▶ Ouvrir</a>
+          <a class="btn btn-github" href="https://github.com/frigorx/inerweb-tp-peser-bouteilles" target="_blank">GitHub</a>
+        </div>
+      </div>
+
+      <div class="carte" data-mots="fgaz mission habilitation prep complete fluides">
+        <div class="carte-titre">inerweb-fgaz</div>
+        <div class="carte-desc">Mission F-GAZ — Préparation complète à l'habilitation fluides frigorigènes.</div>
+        <div class="carte-date">Mis à jour le 03/04/2026</div>
+        <div class="carte-boutons">
+          <a class="btn btn-pages" href="https://frigorx.github.io/inerweb-fgaz/" target="_blank">▶ Ouvrir</a>
+          <a class="btn btn-github" href="https://github.com/frigorx/inerweb-fgaz" target="_blank">GitHub</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ORIENTATION -->
+  <section class="categorie" data-categorie="orientation">
+    <h2 class="categorie-titre">
+      <span class="categorie-icone">🎓</span>
+      Orientation & 2nde TNE
+      <span class="categorie-compte">— Découverte métiers, parcours</span>
+    </h2>
+    <div class="grille">
+
+      <div class="carte" data-mots="decouverte metiers tne 2nde portail orientation risques">
+        <div class="carte-titre">decouverte-metiers-tne</div>
+        <div class="carte-desc">Portail Découverte des Métiers par le Risque (filière TNE).</div>
+        <div class="carte-date">Mis à jour le 24/03/2026</div>
+        <div class="carte-boutons">
+          <a class="btn btn-pages" href="https://frigorx.github.io/decouverte-metiers-tne/" target="_blank">▶ Ouvrir</a>
+          <a class="btn btn-github" href="https://github.com/frigorx/decouverte-metiers-tne" target="_blank">GitHub</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PORTAILS / DÉMOS -->
+  <section class="categorie" data-categorie="portails">
+    <h2 class="categorie-titre">
+      <span class="categorie-icone">📺</span>
+      Portails, démos & laboratoires
+      <span class="categorie-compte">— Présentations direction, beta, expérimentations</span>
+    </h2>
+    <div class="grille">
+
+      <div class="carte" data-mots="demo direction ecosysteme presentation">
+        <div class="carte-titre">inerweb-demo</div>
+        <div class="carte-desc">Démonstrateur écosystème inerWeb — présentation générale.</div>
+        <div class="carte-date">Mis à jour le 20/03/2026</div>
+        <div class="carte-boutons">
+          <a class="btn btn-pages" href="https://frigorx.github.io/inerweb-demo/" target="_blank">▶ Ouvrir</a>
+          <a class="btn btn-github" href="https://github.com/frigorx/inerweb-demo" target="_blank">GitHub</a>
+        </div>
+      </div>
+
+      <div class="carte" data-mots="tools beta outils experimentation">
+        <div class="carte-titre">Iner.web-tools-beta</div>
+        <div class="carte-desc">Outils inerWeb en version bêta — terrain d'expérimentation.</div>
+        <div class="carte-date">Mis à jour le 03/04/2026</div>
+        <div class="carte-boutons">
+          <a class="btn btn-pages" href="https://frigorx.github.io/Iner.web-tools-beta/" target="_blank">▶ Ouvrir</a>
+          <a class="btn btn-github" href="https://github.com/frigorx/Iner.web-tools-beta" target="_blank">GitHub</a>
+        </div>
+      </div>
+
+      <div class="carte" data-mots="parcours accueil rentree eleves debut annee page generique logos">
+        <div class="carte-titre">
+          Parcours-Accueil
+          <span class="badge-nouveau">NOUVEAU</span>
+        </div>
+        <div class="carte-desc">Page d'accueil de rentrée — variantes générique, avec logo, sans logo (15/05/2026). Fichier local, non publié sur GitHub Pages.</div>
+        <div class="carte-date">Mis à jour le 15/05/2026 · local</div>
+        <div class="carte-boutons">
+          <a class="btn btn-local" href="file:///C:/Users/henni/OneDrive/Bureau/inerWeb/Parcours-Accueil/parcours-accueil_GENERIQUE_2026-05-15.html" target="_blank">▶ Ouvrir (local)</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PERSO -->
+  <section class="categorie" data-categorie="perso">
+    <h2 class="categorie-titre">
+      <span class="categorie-icone">🏠</span>
+      Outils personnels
+      <span class="categorie-compte">— Applications non pédagogiques, usage privé</span>
+    </h2>
+    <div class="grille">
+
+      <div class="carte" data-mots="sci familiale immobilier locatif compta fiscal tauri chiffre local exe">
+        <div class="carte-titre">
+          inerweb-immo
+          <span class="badge-nouveau">NOUVEAU</span>
+          <span class="badge-star">★</span>
+          <span class="badge-local" title="Fichier local C:\git — Lenovo uniquement">🖥️ Lenovo</span>
+        </div>
+        <div class="carte-desc">Logiciel SCI familiale (Tauri 2 — application .exe locale chiffrée). Gestion locative + comptabilité/fiscal. Backend chiffré, 33 commandes, interface React. <em>Local uniquement, non publié.</em></div>
+        <div class="carte-date">Mis à jour le 27/06/2026 · local, non publié</div>
+        <div class="carte-boutons">
+          <a class="btn btn-local" href="file:///C:/git/inerweb-immo" target="_blank">📁 Dossier projet</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="vide" id="vide" style="display:none;">
+    Aucune application ne correspond à ta recherche.
+  </div>
+
+</main>
+
+<footer>
+  <strong>inerWeb Édu</strong> — Tableau de bord mis à jour le 01/07/2026 · par F. Henninot<br>
+  35 applications référencées · GitHub : <strong>frigorx</strong> · Données traitées localement — RGPD by design
+</footer>
+
+<script>
+  const recherche = document.getElementById('recherche');
+  const chips = document.querySelectorAll('.chip');
+  const cartes = document.querySelectorAll('.carte');
+  const categories = document.querySelectorAll('.categorie');
+  const compteur = document.getElementById('compteur');
+  const vide = document.getElementById('vide');
+
+  let filtreActif = 'tous';
+  let texteRecherche = '';
+
+  function appliquerFiltres() {
+    let visibles = 0;
+
+    cartes.forEach(carte => {
+      const cat = carte.closest('.categorie').dataset.categorie;
+      const mots = (carte.dataset.mots || '') + ' ' + carte.textContent.toLowerCase();
+      const estEnLigne = carte.querySelector('.btn-pages') !== null;
+
+      const passCat = filtreActif === 'tous'
+        ? true
+        : filtreActif === 'demo'
+          ? estEnLigne
+          : filtreActif === cat;
+      const passTxt = (texteRecherche === '' || mots.toLowerCase().includes(texteRecherche));
+
+      if (passCat && passTxt) {
+        carte.classList.remove('masquee');
+        visibles++;
+      } else {
+        carte.classList.add('masquee');
+      }
+    });
+
+    categories.forEach(c => {
+      const cartesVisibles = c.querySelectorAll('.carte:not(.masquee)').length;
+      if (cartesVisibles === 0) {
+        c.classList.add('masquee');
+      } else {
+        c.classList.remove('masquee');
+      }
+    });
+
+    compteur.textContent = visibles + ' application' + (visibles > 1 ? 's' : '');
+    vide.style.display = (visibles === 0) ? 'block' : 'none';
+  }
+
+  recherche.addEventListener('input', e => {
+    texteRecherche = e.target.value.toLowerCase().trim();
+    appliquerFiltres();
+  });
+
+  chips.forEach(chip => {
+    chip.addEventListener('click', () => {
+      chips.forEach(c => c.classList.remove('actif'));
+      chip.classList.add('actif');
+      filtreActif = chip.dataset.filtre;
+      appliquerFiltres();
+    });
+  });
+
+  // Raccourci clavier : / pour focus recherche
+  document.addEventListener('keydown', e => {
+    if (e.key === '/' && document.activeElement !== recherche) {
+      e.preventDefault();
+      recherche.focus();
+    }
+  });
+</script>
+
+</body>
+</html>
