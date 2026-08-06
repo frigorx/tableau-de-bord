@@ -396,7 +396,7 @@
     <button class="chip" data-filtre="perso">🏠 Perso</button>
     <button class="chip chip-demo" data-filtre="demo">🎬 Mode démo</button>
   </div>
-  <div class="compteur" id="compteur">40 applications</div>
+  <div class="compteur" id="compteur">42 applications</div>
 </div>
 
 <main id="contenu">
@@ -646,6 +646,20 @@
     </h2>
     <div class="grille">
 
+      <div class="carte" data-mots="regulfroid regul froid simulateur regulateur mr51 johnson controls danfoss ekc 202 carel mastercella md33 ako sonde ntc 10k ptc 990 pt1000 cablage bornier consigne hysteresis differentiel offset degivrage parametres electronique">
+        <div class="carte-titre">
+          Régul'Froid
+          <span class="badge-nouveau">NOUVEAU</span>
+          <span class="badge-local" title="Logiciel fermé — documents constructeurs et images sous permission d'usage pédagogique privé, pas de version en ligne">🔒 Logiciel fermé</span>
+        </div>
+        <div class="carte-desc">Simulateur pédagogique des régulateurs frigorifiques — <strong>Johnson Controls MR51+</strong>, <strong>Danfoss EKC 202</strong> et <strong>CAREL MasterCella MD33</strong> (emplacement AKO réservé). Façades manipulables, paramètres réels, laboratoire de sondes NTC 10 kΩ / PTC 990 Ω / Pt1000 avec courbe et valeur ohmique, consigne et différentiel, cycle de dégivrage, exercices de câblage au bornier avec le document ressource sous les yeux. Se lance en local : <code>npm install</code> puis <code>npm run dev</code>, port 3000.</div>
+        <div class="carte-date">Mis à jour le 06/08/2026 · local, dépôt privé</div>
+        <div class="carte-boutons">
+          <a class="btn btn-local" href="file:///C:/git/regulfroid-simulateur" target="_blank">📁 Dossier projet</a>
+          <a class="btn btn-github" href="https://github.com/frigorx/regulfroid-simulateur" target="_blank">GitHub (privé)</a>
+        </div>
+      </div>
+
       <div class="carte" data-mots="frigolo mollier psychro bilan thermique cop pac fluides regle outils portail">
         <div class="carte-titre">
           inerweb-frigolo
@@ -882,13 +896,13 @@
         </div>
       </div>
 
-      <div class="carte" data-mots="inerweb centre hub gestion formation examen tablettes sessions registre organisme qualite securite secrets rotation restauration restaurer sauvegarde automatique">
+      <div class="carte" data-mots="inerweb centre hub gestion formation examen tablettes sessions registre organisme qualite securite secrets rotation restauration restaurer sauvegarde automatique banque entrainement distracteurs qcm devinabilite mesure">
         <div class="carte-titre">
           inerWeb Centre (Hub)
           <span class="badge-nouveau">NOUVEAU</span>
         </div>
-        <div class="carte-desc">Hub de gestion du centre de formation — sessions d'examen blanc et officiel sur tablettes (deux surfaces réseau séparées), candidats, registre scellé, écran Organisme, documents générés (convocations, émargement, attestations, PV), documentation PDF. Local uniquement, aucune version en ligne : dépôt C:\git\inerweb-formation, démonstrateur installé C:\inerWeb-HabFlu (raccourci Bureau « Inerweb habflu »). Chantier sécurité du 05/08 (après-midi) : plus aucun secret dans les dépôts (source unique hors dépôt, dm.html fait saisir le code, contrôle anti-secret bloquant dans le packager et le dossier de partage) ; rotation engagée — nouveaux codes générés et examens re-chiffrés. Décision du 05/08 au soir : Apps Script INTERDIT partout, base SQL obligatoire (restauration du choix d'origine) — le dispositif DM en ligne passe en archive ; il ne reste qu'à révoquer les deux anciens déploiements Google (compte inerweb.fh), sans remplacement. Incrément 11 (même jour) : journal PROBANT — sceau à clé séparée hors base et ancrage externe à recopier au registre papier, une réécriture par l'administrateur est désormais détectée — et ACCÈS AU POSTE MAÎTRE par code, sans valeur par défaut (à définir au prochain lancement du raccourci). Incrément 12 : MODULE DM — le devoir noté des classes scolaires, recréé en SQL après la suppression du dispositif Google (comptes élèves, tentatives, note sur 20, remédiation, export École Directe, code d'inscription par classe) ; écrans élève sur la surface tablette, écrans professeur sur l'administration, fermé pendant une épreuve officielle. Incrément 13 : SAUVEGARDES REDONDANTES ET CHIFFRÉES — le logiciel dépose une copie chiffrée de sa base dans plusieurs dossiers au choix (un dossier Google Drive, un dossier OneDrive, une clé USB), relit et rouvre chaque archive après écriture, et sait restaurer ; la clé reste sur le poste et ne part jamais avec les archives. Audit adversarial dans la foulée : une base vide pouvait effacer les bonnes archives (dossier recopié, chemin mal réglé) — désormais refus d'écrire et rotation gelée dès que le contenu s'effondre. 332 contrôles automatiques, attaques et sinistres réellement joués. Correctif du 05/08 au soir : le logiciel refusait sa propre page d'accès (« Requête refusée » au premier code tapé) — cause trouvée en écoutant les en-têtes du navigateur, corrigé et vérifié dans un vrai navigateur. Incrément 15 (même nuit) : la RESTAURATION devient accessible — RESTAURER.bat à côté de DEMARRER.bat (glisser-déposer l'archive dessus, refus tant que le logiciel tourne, base d'avant conservée à côté, jamais effacée) ; compléments d'audit : écriture forcée sur le disque avant le nom définitif, les messages d'échec distinguent enfin « mauvaise clé » (avec l'empreinte à chercher au coffre) de « fichier abîmé », et un filet de sauvegarde automatique part au démarrage si la dernière réussite date de plus de 24 h (jamais pendant une épreuve). 359 contrôles, tous rejoués aussi depuis le paquet extrait, restauration réelle comprise. Incrément 16 : cahier des charges de l'INTERFACE (docs/CDC-INTERFACE-UI.md) — refonte UI engagée via Claude Design (Franck pilote le design, maquettes à porter ensuite dans le code).</div>
-        <div class="carte-date">Mis à jour le 05/08/2026</div>
+        <div class="carte-desc">Hub de gestion du centre de formation — sessions d'examen blanc et officiel sur tablettes (deux surfaces réseau séparées), candidats, registre scellé, écran Organisme, documents générés (convocations, émargement, attestations, PV), documentation PDF. Local uniquement, aucune version en ligne : dépôt C:\git\inerweb-formation, démonstrateur installé C:\inerWeb-HabFlu (raccourci Bureau « Inerweb habflu »). Chantier sécurité du 05/08 (après-midi) : plus aucun secret dans les dépôts (source unique hors dépôt, dm.html fait saisir le code, contrôle anti-secret bloquant dans le packager et le dossier de partage) ; rotation engagée — nouveaux codes générés et examens re-chiffrés. Décision du 05/08 au soir : Apps Script INTERDIT partout, base SQL obligatoire (restauration du choix d'origine) — le dispositif DM en ligne passe en archive ; il ne reste qu'à révoquer les deux anciens déploiements Google (compte inerweb.fh), sans remplacement. Incrément 11 (même jour) : journal PROBANT — sceau à clé séparée hors base et ancrage externe à recopier au registre papier, une réécriture par l'administrateur est désormais détectée — et ACCÈS AU POSTE MAÎTRE par code, sans valeur par défaut (à définir au prochain lancement du raccourci). Incrément 12 : MODULE DM — le devoir noté des classes scolaires, recréé en SQL après la suppression du dispositif Google (comptes élèves, tentatives, note sur 20, remédiation, export École Directe, code d'inscription par classe) ; écrans élève sur la surface tablette, écrans professeur sur l'administration, fermé pendant une épreuve officielle. Incrément 13 : SAUVEGARDES REDONDANTES ET CHIFFRÉES — le logiciel dépose une copie chiffrée de sa base dans plusieurs dossiers au choix (un dossier Google Drive, un dossier OneDrive, une clé USB), relit et rouvre chaque archive après écriture, et sait restaurer ; la clé reste sur le poste et ne part jamais avec les archives. Audit adversarial dans la foulée : une base vide pouvait effacer les bonnes archives (dossier recopié, chemin mal réglé) — désormais refus d'écrire et rotation gelée dès que le contenu s'effondre. 332 contrôles automatiques, attaques et sinistres réellement joués. Correctif du 05/08 au soir : le logiciel refusait sa propre page d'accès (« Requête refusée » au premier code tapé) — cause trouvée en écoutant les en-têtes du navigateur, corrigé et vérifié dans un vrai navigateur. Incrément 15 (même nuit) : la RESTAURATION devient accessible — RESTAURER.bat à côté de DEMARRER.bat (glisser-déposer l'archive dessus, refus tant que le logiciel tourne, base d'avant conservée à côté, jamais effacée) ; compléments d'audit : écriture forcée sur le disque avant le nom définitif, les messages d'échec distinguent enfin « mauvaise clé » (avec l'empreinte à chercher au coffre) de « fichier abîmé », et un filet de sauvegarde automatique part au démarrage si la dernière réussite date de plus de 24 h (jamais pendant une épreuve). 359 contrôles, tous rejoués aussi depuis le paquet extrait, restauration réelle comprise. Incrément 16 : cahier des charges de l'INTERFACE (docs/CDC-INTERFACE-UI.md) — refonte UI engagée via Claude Design (Franck pilote le design, maquettes à porter ensuite dans le code). Incrément 17 (06/08) : la BANQUE D'ENTRAÎNEMENT remise d'aplomb. Constat de départ : un élève qui cochait partout la proposition la plus longue, sans rien lire, décrochait 14/20 — la bonne réponse était la plus longue dans 195 questions sur 266. Après le chantier : 186 questions réécrites en 13 lots, plus AUCUNE proposition ne se détache (0 sur 266, contre 161 au départ) et celui qui ne lit pas retombe à 5/20, soit exactement le hasard. Les distracteurs de fantaisie (« Pour des raisons esthétiques », « Car ça coûte cher », « Pour faire joli ») sont devenus des erreurs réelles d'élève : confusion aspiration/refoulement, accumulateur/bouteille liquide, propane pris pour un A2L, « une flamme brève, ça passe ». Les 80 autres questions ont été laissées volontairement (dates, chiffres, codes de fluides : l'écart de longueur y est invisible) et chaque lot le dit. Corrigé aussi : trois questions de sécurité électrique saisies sans apostrophes (« qu un VAT », « C est »). Tout est réversible — chaque réécriture est datée et motivée dans un fichier de données à part. 398 contrôles, dont deux qui empêchent la banque d'y reperdre.</div>
+        <div class="carte-date">Mis à jour le 06/08/2026</div>
       </div>
 
       <div class="carte" data-mots="vanne service rotalock coupe animee positions manifold pressostat p p1 presse etoupe frigoriste compresseur bp hp mini jeux">
@@ -1007,8 +1021,8 @@
 </main>
 
 <footer>
-  <strong>inerWeb Édu</strong> — Tableau de bord mis à jour le 04/08/2026 · par F. Henninot<br>
-  40 applications référencées · GitHub : <strong>frigorx</strong> · Données traitées localement — RGPD by design<br>
+  <strong>inerWeb Édu</strong> — Tableau de bord mis à jour le 06/08/2026 · par F. Henninot<br>
+  42 applications référencées · GitHub : <strong>frigorx</strong> · Données traitées localement — RGPD by design<br>
   <span title="Logiciels fermés">🔒</span> = logiciel fermé, non accessible en ligne (usage interne uniquement) — le code source peut être partagé via un dépôt GitHub privé
 </footer>
 
